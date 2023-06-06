@@ -31,9 +31,9 @@ async function automation() {
 
 	await driver.actions().keyDown(Key.ENTER).perform();
 
-	// let People = await driver.findElement(By.xpath('//*[@id="search-reusables__filters-bar"]/ul/li[1]/button'));
+	let People = await driver.findElement(By.xpath('//*[@id="search-reusables__filters-bar"]/ul/li[1]/button'));
 
-	// await People.click();
+	await People.click();
 
 
 	// The functionality of the both the statements are same on line number 14 & 16
