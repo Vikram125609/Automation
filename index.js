@@ -13,13 +13,22 @@ async function automation() {
 
 	// let Email-or-Phone = await driver.findElement(By.name('email-or-phone'));
 
-	let Username = await driver.findElement(By.name('session_key'));
+	try {
+		let Username = await driver.findElement(By.name('session_key'));
+		await Username.sendKeys(`${process.env.USERNAME}`);
+	} catch (error) {
+		let Username = await driver.findElement(By.name('email-or-phone'));
+		await Username.sendKeys(`${process.env.USERNAME}`);
+	}
 
-	await Username.sendKeys(`${process.env.USERNAME}`);
+	try {
+		let Password = await driver.findElement(By.name('session_password'));
+		await Password.sendKeys(`${process.env.PASSWORD}`);
+	} catch (error) {
+		let Password = await driver.findElement(By.name('password'));
+		await Password.sendKeys(`${process.env.PASSWORD}`);
+	}
 
-	let Password = await driver.findElement(By.name('session_password'));
-
-	await Password.sendKeys(`${process.env.PASSWORD}`);
 
 	let submitButton = await driver.findElement(By.className('sign-in-form__submit-btn--full-width'));
 
@@ -31,9 +40,9 @@ async function automation() {
 
 	await driver.actions().keyDown(Key.ENTER).perform();
 
-	let People = await driver.findElement(By.xpath('//*[@id="search-reusables__filters-bar"]/ul/li[1]/button'));
+	let People = await driver.findElement(By.className('app-aware-link'));
 
-	await People.click();
+	console.log(People);
 
 
 	// The functionality of the both the statements are same on line number 14 & 16
